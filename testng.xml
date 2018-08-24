@@ -3,7 +3,7 @@
 <suite name="TestSuite">
     <test name="TestOne">
         <classes>
-           <class name="DemoqaTest" />
+           <class name="NewIssueTest" />
         </classes>
     </test>
 </suite>

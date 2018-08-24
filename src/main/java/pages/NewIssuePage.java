@@ -1,3 +1,5 @@
+package pages;
+
 import com.codeborne.selenide.Condition;
 
 import static com.codeborne.selenide.Selectors.byId;
