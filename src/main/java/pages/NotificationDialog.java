@@ -1,24 +1,35 @@
 package pages;
 
-import com.codeborne.selenide.Condition;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
 
 public class NotificationDialog {
 
-    private String mainContainerID = "aui-flag-container";
-    private String createdKeyLinkXPath = "//a[@class = 'issue-created-key issue-link']";
+    private final WebDriver driver;
+
+    public NotificationDialog(WebDriver driver) {
+        this.driver = driver;
+    }
 
     public String getCreatedIssueKey(){
-        return $(byXpath(createdKeyLinkXPath)).getAttribute("data-issue-key");
+        WebElement dialog = (new WebDriverWait(driver, 10))
+                                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='aui-flag-container']//a[@data-issue-key]")));
+
+        return dialog.getAttribute("data-issue-key");
     }
 
     public String getCreatedIssueLink(){
-        return $(byXpath(createdKeyLinkXPath)).getAttribute("href");
+        WebElement dialog = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='aui-flag-container']//a[@data-issue-key]")));
+
+        return dialog.getAttribute("href");
     }
 
     public boolean isSuccessDialogDisplayed(){
-        return $(byXpath("//*[@id='" + mainContainerID + "']//div[contains(@class,'success')]")).shouldBe(Condition.visible).isDisplayed();
+        return driver.findElement(By.xpath("//div[@id='aui-flag-container']//div[contains(@class,'success')")).isDisplayed();
     }
 }

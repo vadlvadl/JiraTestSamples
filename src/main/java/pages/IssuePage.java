@@ -1,5 +1,11 @@
 package pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byId;
@@ -20,12 +26,20 @@ public class IssuePage {
     private String priorityFieldID = "priority-field";
     private String priorityFormSubmitButtonXPath = "//form[@id='priority-form']/div[@class='save-options']/button[@type='submit']";
 
+    private final WebDriver driver;
+
+    public IssuePage(WebDriver driver) {
+        this.driver = driver;
+    }
+
     public void navigateTo(String url){
-        open(url);
+        driver.get(url);
     }
 
     public boolean atRequiredPage(){
-        return $(byId("issue-content")).shouldBe(visible).isDisplayed();
+        WebElement content = (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.id("issue-content")));
+        return content.isDisplayed();
     }
 
     public void clickAddCommentButton(){
