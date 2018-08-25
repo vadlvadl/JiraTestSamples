@@ -1,17 +1,12 @@
 
-import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.*;
 import steps.LoginSteps;
 
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 public class NewIssueTest {
 
@@ -55,6 +50,16 @@ public class NewIssueTest {
         Assert.assertTrue(dialog.isSuccessDialogDisplayed());
     }
 
+    @Test (priority = 2, dependsOnMethods = {"createNewIssueTest"})
+    public void addCommentTest(){
+
+        String textComment = "Sample comment 1";
+
+        IssuePage issuePage = new IssuePage(driver);
+        issuePage.navigateTo(issueURL);
+
+    }
+
 //    @Test
 //    public void moveCreatedIssue(){
 ////        open("http://jira.hillel.it:8080/secure/RapidBoard.jspa?rapidView=302&projectKey=QAAUT6");
@@ -75,14 +80,15 @@ public class NewIssueTest {
     @Test (priority = 10, dependsOnMethods = {"createNewIssueTest"})
     public void deleteCreatedIssue(){
 
-        IssuePage issuePage = new IssuePage();
+        IssuePage issuePage = new IssuePage(driver);
         issuePage.navigateTo(issueURL);
         issuePage.atRequiredPage();
         issuePage.clickMenuMoreButton();
         issuePage.clickDeleteIssueButton();
         issuePage.confirmDeleteIssue();
 
-        NotificationDialog dialog = new NotificationDialog();
+        NotificationDialog dialog = new NotificationDialog(driver);
+
         Assert.assertTrue(dialog.isSuccessDialogDisplayed());
     }
 }

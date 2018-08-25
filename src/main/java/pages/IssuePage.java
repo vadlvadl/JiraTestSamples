@@ -16,7 +16,6 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class IssuePage {
 
-    private String commentButtonID = "footer-comment-button";
     private String textTabButtonID = "aui-uid-1";
     private String commentTextAreaXPath = "//*[@id='comment-wiki-edit']/textarea";
     private String addCommentSubmitButtonID = "issue-comment-add-submit";
@@ -37,13 +36,14 @@ public class IssuePage {
     }
 
     public boolean atRequiredPage(){
-        WebElement content = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.id("issue-content")));
-        return content.isDisplayed();
+        return (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.id("issue-content"))).isDisplayed();
     }
 
-    public void clickAddCommentButton(){
-        $(byId(commentButtonID)).click();
+    public AddCommentForm clickAddCommentButton(){
+
+        $(byId("footer-comment-button")).click();
+        return new AddCommentForm(driver);
     }
 
     public void clickTextareaTabButton(){
@@ -81,6 +81,7 @@ public class IssuePage {
     public void clickPriorityElement(){
         $(byId(priorityElementID)).click();
     }
+
 
     public void enterPriorityText(String text){
         $(byId(priorityFieldID)).sendKeys(text);
