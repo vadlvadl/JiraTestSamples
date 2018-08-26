@@ -16,6 +16,8 @@ public class NewIssueTest {
 
     @BeforeTest
     public void setup(){
+        System.setProperty("webdriver.chrome.driver","chromedriver_win_x86_2.41.exe");
+
         driver = new ChromeDriver();
 
         LoginSteps loginSteps = new LoginSteps(driver);
@@ -57,6 +59,17 @@ public class NewIssueTest {
 
         IssuePage issuePage = new IssuePage(driver);
         issuePage.navigateTo(issueURL);
+        issuePage.clickAddCommentButton()
+                .waitUntilLoaded()
+                .selectTextMode()
+                .enterCommentText(textComment)
+                .submitForm();
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 

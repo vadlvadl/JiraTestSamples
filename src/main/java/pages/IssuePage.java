@@ -2,28 +2,13 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.open;
+import java.util.List;
+
 
 public class IssuePage {
-
-    private String textTabButtonID = "aui-uid-1";
-    private String commentTextAreaXPath = "//*[@id='comment-wiki-edit']/textarea";
-    private String addCommentSubmitButtonID = "issue-comment-add-submit";
-    private String issueActionsContainerID = "issue_actions_container";
-    private String issueActionsTextXPath = "//*[@id='issue_actions_container']//folowing::[@class='action-body flooded']";
-    private String priorityElementID = "priority-val";
-    private String priorityFieldID = "priority-field";
-    private String priorityFormSubmitButtonXPath = "//form[@id='priority-form']/div[@class='save-options']/button[@type='submit']";
 
     private final WebDriver driver;
 
@@ -42,54 +27,25 @@ public class IssuePage {
 
     public AddCommentForm clickAddCommentButton(){
 
-        $(byId("footer-comment-button")).click();
+        driver.findElement(By.id("footer-comment-button")).click();
         return new AddCommentForm(driver);
     }
 
-    public void clickTextareaTabButton(){
-        $(byId(textTabButtonID)).click();
-    }
-
     public void clickMenuMoreButton(){
-        $(byId("opsbar-operations_more")).click();
+        driver.findElement(By.id("opsbar-operations_more")).click();
     }
 
     public void clickDeleteIssueButton(){
-        $(byId("delete-issue")).click();
+        driver.findElement(By.id("delete-issue")).click();
     }
 
     public void confirmDeleteIssue(){
-        $(byId("delete-issue-submit")).click();
-    }
-
-    public void enterTextToTextarea(String text){
-        $(byXpath(commentTextAreaXPath)).sendKeys(text);
-    }
-
-    public void clickSubmitCommentButton(){
-        $(byId(addCommentSubmitButtonID)).click();
+        driver.findElement(By.id("delete-issue-submit")).click();
     }
 
     public String getLastComment(){
-        return $$(byXpath(issueActionsTextXPath)).last().getText();
-    }
-
-    public void checkLastCommentText(String text){
-        $$(byXpath(issueActionsTextXPath)).last().shouldHave(text(text));
-    }
-
-    public void clickPriorityElement(){
-        $(byId(priorityElementID)).click();
-    }
-
-
-    public void enterPriorityText(String text){
-        $(byId(priorityFieldID)).sendKeys(text);
-        $(byId(priorityFieldID)).pressEnter();
-    }
-
-    public void clickSubmitAtPriorityForm(){
-        $(byXpath(priorityFormSubmitButtonXPath)).click();
+        List comments = driver.findElements(By.xpath("//*[@id='issue_actions_container']//folowing::[@class='action-body flooded']"));
+        return comments.get(comments.size() - 1).toString();
     }
 
 }
