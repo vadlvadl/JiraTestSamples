@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -31,16 +32,19 @@ public class IssuePage {
         return new AddCommentForm(driver);
     }
 
-    public void clickMenuMoreButton(){
+    public IssuePage clickMenuMoreButton(){
         driver.findElement(By.id("opsbar-operations_more")).click();
+        return this;
     }
 
-    public void clickDeleteIssueButton(){
+    public IssuePage clickDeleteIssueButton(){
         driver.findElement(By.id("delete-issue")).click();
+        return this;
     }
 
     public void confirmDeleteIssue(){
-        driver.findElement(By.id("delete-issue-submit")).click();
+        (new WebDriverWait(driver,10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.id("delete-issue-submit"))).click();
     }
 
     public String getLastComment(){

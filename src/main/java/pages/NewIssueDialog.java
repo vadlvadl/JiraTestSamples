@@ -14,27 +14,27 @@ public class NewIssueDialog {
 
     public NewIssueDialog(WebDriver driver) {
         this.driver = driver;
-    }
 
-    public NewIssueDialog waitDialogIsDisplayed() {
-        dialog = (new WebDriverWait(driver, 15))
+        (new WebDriverWait(driver, 15))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.id("create-issue-dialog")));
-
-        return this;
     }
 
     public  NewIssueDialog enterSummary(String summary){
-        dialog.findElement(By.id("summary")).sendKeys(summary);
+        (new WebDriverWait(driver,10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.id("summary"))).sendKeys(summary);
         return this;
     }
     public  NewIssueDialog enterDescription(String description){
-        dialog.findElement(By.xpath("//li[@data-mode='source']/a")).click(); // Switch to text mode
-        dialog.findElement(By.id("description")).sendKeys(description);
+        (new WebDriverWait(driver,10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-mode='source']/a"))).click(); // Switch to text mode
+        (new WebDriverWait(driver,10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.id("description"))).sendKeys(description);
         return this;
     }
 
     public NewIssueDialog clickAssignToMe(){
-        dialog.findElement(By.id("assign-to-me-trigger")).click();
+        (new WebDriverWait(driver,10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.id("assign-to-me-trigger"))).click();
         return this;
     }
 

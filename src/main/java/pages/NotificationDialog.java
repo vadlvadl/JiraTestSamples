@@ -30,6 +30,7 @@ public class NotificationDialog {
     }
 
     public boolean isSuccessDialogDisplayed(){
-        return driver.findElement(By.xpath("//div[@id='aui-flag-container']//div[contains(@class,'success')]")).isDisplayed();
+        return (new WebDriverWait(driver,10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='aui-flag-container']//div[contains(@class,'success')]"))).isDisplayed();
     }
 }

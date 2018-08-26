@@ -37,8 +37,7 @@ public class NewIssueTest {
         dashboardPage.clickCreateIssueButton();
 
         NewIssueDialog newIssueDialog = new NewIssueDialog(driver);
-        newIssueDialog.waitDialogIsDisplayed()
-                .enterSummary(textSummary)
+        newIssueDialog.enterSummary(textSummary)
                 .enterDescription(textDescription)
                 .clickAssignToMe()
                 .submitDialog();
@@ -73,32 +72,15 @@ public class NewIssueTest {
 
     }
 
-//    @Test
-//    public void moveCreatedIssue(){
-////        open("http://jira.hillel.it:8080/secure/RapidBoard.jspa?rapidView=302&projectKey=QAAUT6");
-//
-////        issueKey = "QAAUT6-165";
-////        issueURL = "http://jira.hillel.it:8080/browse/QAAUT6-165";
-//
-//        Actions actions = new Actions(WebDriverRunner.getWebDriver());
-//
-//        actions.dragAndDrop($(byXpath("//div[@class='ghx-key']/a[contains(text()," + issueKey + ")]")),$(byXpath("//li[@data-column-id='860']"))).perform();
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     @Test (priority = 10, dependsOnMethods = {"createNewIssueTest"})
     public void deleteCreatedIssue(){
 
         IssuePage issuePage = new IssuePage(driver);
         issuePage.navigateTo(issueURL);
         issuePage.atRequiredPage();
-        issuePage.clickMenuMoreButton();
-        issuePage.clickDeleteIssueButton();
-        issuePage.confirmDeleteIssue();
+        issuePage.clickMenuMoreButton()
+                .clickDeleteIssueButton()
+                .confirmDeleteIssue();
 
         NotificationDialog dialog = new NotificationDialog(driver);
 
