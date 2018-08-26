@@ -32,6 +32,6 @@ public class AddCommentForm {
     }
 
     public void submitForm(){
-        driver.findElement(By.xpath(formXpath + "//input[@name='add']")).click();
+        driver.findElement(By.id("//*[@id='issue-comment-add-submit']")).click();
     }
 }
