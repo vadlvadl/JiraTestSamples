@@ -10,31 +10,29 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class NewIssueDialog {
 
     private final WebDriver driver;
+    private WebDriverWait wait;
     private WebElement dialog;
 
     public NewIssueDialog(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver,10);
 
-        (new WebDriverWait(driver, 15))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.id("create-issue-dialog")));
+        dialog = (new WebDriverWait(driver,15))
+            .until(ExpectedConditions.visibilityOfElementLocated(By.id("create-issue-dialog")));
     }
 
     public  NewIssueDialog enterSummary(String summary){
-        (new WebDriverWait(driver,10))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.id("summary"))).sendKeys(summary);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("summary"))).sendKeys(summary);
         return this;
     }
     public  NewIssueDialog enterDescription(String description){
-        (new WebDriverWait(driver,10))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-mode='source']/a"))).click(); // Switch to text mode
-        (new WebDriverWait(driver,10))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.id("description"))).sendKeys(description);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-mode='source']/a"))).click(); // Switch to text mode
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("description"))).sendKeys(description);
         return this;
     }
 
     public NewIssueDialog clickAssignToMe(){
-        (new WebDriverWait(driver,10))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.id("assign-to-me-trigger"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assign-to-me-trigger"))).click();
         return this;
     }
 
