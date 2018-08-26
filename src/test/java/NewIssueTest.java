@@ -16,7 +16,7 @@ public class NewIssueTest {
 
     @BeforeTest
     public void setup(){
-        System.setProperty("webdriver.chrome.driver","chromedriver_win_x86_2.41.exe");
+//        System.setProperty("webdriver.chrome.driver","chromedriver_win_x86_2.41.exe");
 
         driver = new ChromeDriver();
 
