@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AddCommentForm {
 
-    private String formXpath = "//*[@id='addComment']//form";
+    private String formXpath = "//*[@id='addcomment']//form";
     private final WebDriver driver;
 
     AddCommentForm(WebDriver driver) {
