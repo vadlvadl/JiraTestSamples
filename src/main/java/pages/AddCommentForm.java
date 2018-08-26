@@ -10,28 +10,25 @@ public class AddCommentForm {
 
     private String formXpath = "//*[@id='addcomment']//form";
     private final WebDriver driver;
+    private WebElement form;
 
     AddCommentForm(WebDriver driver) {
         this.driver = driver;
-    }
-
-    public AddCommentForm waitUntilLoaded(){
-        WebElement form = (new WebDriverWait(driver,10))
+        this.form = (new WebDriverWait(driver,10))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(formXpath)));
-        return this;
     }
 
     public AddCommentForm selectTextMode(){
-        driver.findElement(By.xpath(formXpath + "//li[@data-mode='source']")).click();
+        form.findElement(By.xpath("//li[@data-mode='source']")).click();
         return this;
     }
 
     public AddCommentForm enterCommentText(String text){
-        driver.findElement(By.xpath(formXpath + "//textarea[@name='comment']")).sendKeys(text);
+        form.findElement(By.xpath("//textarea[@name='comment']")).sendKeys(text);
         return this;
     }
 
     public void submitForm(){
-        driver.findElement(By.id("issue-comment-add-submit")).click();
+        form.findElement(By.id("issue-comment-add-submit")).click();
     }
 }

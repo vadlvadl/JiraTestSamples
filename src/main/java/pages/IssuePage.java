@@ -12,9 +12,11 @@ import java.util.List;
 public class IssuePage {
 
     private final WebDriver driver;
+    private WebDriverWait wait;
 
     public IssuePage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, 10);
     }
 
     public void navigateTo(String url){
@@ -22,13 +24,12 @@ public class IssuePage {
     }
 
     public boolean atRequiredPage(){
-        return (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.id("issue-content"))).isDisplayed();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("issue-content"))).isDisplayed();
     }
 
     public AddCommentForm clickAddCommentButton(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("footer-comment-button"))).click();
 
-        driver.findElement(By.id("footer-comment-button")).click();
         return new AddCommentForm(driver);
     }
 
@@ -43,8 +44,7 @@ public class IssuePage {
     }
 
     public void confirmDeleteIssue(){
-        (new WebDriverWait(driver,10))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.id("delete-issue-submit"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("delete-issue-submit"))).click();
     }
 
     public String getLastComment(){

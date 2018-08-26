@@ -59,7 +59,6 @@ public class NewIssueTest {
         IssuePage issuePage = new IssuePage(driver);
         issuePage.navigateTo(issueURL);
         issuePage.clickAddCommentButton()
-                .waitUntilLoaded()
                 .selectTextMode()
                 .enterCommentText(textComment)
                 .submitForm();
