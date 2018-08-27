@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+
 public class DashboardPage {
 
     private String dashboardPageURL = "http://jira.hillel.it:8080/secure/Dashboard.jspa";
