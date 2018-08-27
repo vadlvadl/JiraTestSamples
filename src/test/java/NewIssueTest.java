@@ -65,13 +65,6 @@ public class NewIssueTest {
                 .selectTextMode()
                 .enterCommentText(textComment)
                 .submitForm();
-
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @Test (priority = 10, dependsOnMethods = {"createNewIssueTest"})
