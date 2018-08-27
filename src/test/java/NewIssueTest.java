@@ -1,4 +1,5 @@
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -87,8 +88,8 @@ public class NewIssueTest {
 
         } catch (TimeoutException ex){
 
-            Actions actions = new Actions(driver);
-            actions.moveToElement(issuePage.getMenuDeleteButton());
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView();", issuePage.getMenuDeleteButton());
         }
 
 
