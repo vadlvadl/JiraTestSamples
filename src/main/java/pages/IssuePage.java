@@ -39,7 +39,7 @@ public class IssuePage {
     }
 
     public IssuePage clickDeleteIssueButton(){
-        driver.findElement(By.id("delete-issue")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("delete-issue"))).click();
         return this;
     }
 
