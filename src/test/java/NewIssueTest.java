@@ -1,6 +1,8 @@
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -77,9 +79,18 @@ public class NewIssueTest {
         IssuePage issuePage = new IssuePage(driver);
         issuePage.navigateTo(issueURL);
         issuePage.atRequiredPage();
-        issuePage.clickMenuMoreButton()
-                .clickDeleteIssueButton()
-                .confirmDeleteIssue();
+        issuePage.clickMenuMoreButton();
+        try{
+
+            issuePage.clickDeleteIssueButton()
+                     .confirmDeleteIssue();
+
+        } catch (TimeoutException ex){
+
+            Actions actions = new Actions(driver);
+            actions.moveToElement(issuePage.getMenuDeleteButton());
+        }
+
 
         NotificationDialog dialog = new NotificationDialog(driver);
 

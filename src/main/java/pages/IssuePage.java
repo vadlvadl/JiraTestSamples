@@ -47,6 +47,10 @@ public class IssuePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("delete-issue-submit"))).click();
     }
 
+    public WebElement getMenuDeleteButton(){
+        return driver.findElement(By.id("delete-issue"));
+    }
+
     public String getLastComment(){
         List comments = driver.findElements(By.xpath("//*[@id='issue_actions_container']//folowing::[@class='action-body flooded']"));
         return comments.get(comments.size() - 1).toString();
