@@ -26,7 +26,7 @@ public class NewIssueDialog {
         return this;
     }
     public  NewIssueDialog enterDescription(String description){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-mode='source']/a"))).click(); // Switch to text mode
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@data-mode='source']/a"))).click(); // Switch to text mode
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("description"))).sendKeys(description);
         return this;
     }
