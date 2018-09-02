@@ -48,7 +48,7 @@ public class IssuePage {
     }
 
     public String getLastComment(){
-        List comments = driver.findElements(By.xpath("//*[@id='issue_actions_container']//folowing::[@class='action-body flooded']"));
+        List comments = driver.findElements(By.xpath("//*[@id='issue_actions_container']//following::div[@class='action-body flooded']"));
         return comments.get(comments.size() - 1).toString();
     }
 

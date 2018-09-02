@@ -1,9 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="TestSuite">
-    <test name="TestOne">
+<suite name="JiraTestSuite">
+    <test name="EditIssue">
+        <parameter name="browser" value="chrome" />
+        <parameter name="username" value="Vadim_Lizogub"/>
+        <parameter name="password" value="t@stPsSwd"/>
+        <parameter name="editIssueURL" value="http://jira.hillel.it:8080/browse/QAAUT6-229"/>
+        <parameter name="editIssueCommentText" value="Comment from testng parameter"/>
         <classes>
-           <class name="NewIssueTest" />
+           <class name="EditIssueTest" />
         </classes>
     </test>
 </suite>
