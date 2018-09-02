@@ -74,6 +74,8 @@ public class NewIssueTest {
                 .selectTextMode()
                 .enterCommentText(textComment)
                 .submitForm();
+
+        Assert.assertEquals(issuePage.getLastComment(), textComment);
     }
 
     @Test (priority = 10, dependsOnMethods = {"createNewIssueTest"})

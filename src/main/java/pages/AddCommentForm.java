@@ -30,5 +30,7 @@ public class AddCommentForm {
 
     public void submitForm(){
         form.findElement(By.id("issue-comment-add-submit")).click();
+        (new WebDriverWait(driver, 15))
+                .until(ExpectedConditions.numberOfElementsToBe(By.xpath(formXpath),0));
     }
 }
