@@ -48,8 +48,9 @@ public class IssuePage {
     }
 
     public String getLastComment(){
-        List comments = driver.findElements(By.xpath("//*[@id='issue_actions_container']//following::div[@class='action-body flooded']"));
-        return comments.get(comments.size() - 1).toString();
+        WebElement lastComment = driver.findElement(By.xpath("//*[@id='issue_actions_container']//following::div[@class='action-body flooded'][last()]"));
+
+        return lastComment.getText();
     }
 
 }

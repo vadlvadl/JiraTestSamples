@@ -1,6 +1,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="JiraTestSuite">
+
+    <test name="CreateIssue">
+        <parameter name="browser" value="chrome" />
+        <parameter name="username" value="Vadim_Lizogub"/>
+        <parameter name="password" value="t@stPsSwd"/>
+        <classes>
+            <class name="NewIssueTest" />
+        </classes>
+    </test>
+
     <test name="EditIssue">
         <parameter name="browser" value="chrome" />
         <parameter name="username" value="Vadim_Lizogub"/>
@@ -11,4 +21,5 @@
            <class name="EditIssueTest" />
         </classes>
     </test>
+
 </suite>

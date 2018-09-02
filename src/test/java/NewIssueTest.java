@@ -2,10 +2,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.*;
 import steps.LoginSteps;
 
@@ -18,30 +15,32 @@ public class NewIssueTest {
 
 
     @DataProvider
-    public static Object[][] credentials(){
-        return new Object[][]{{"Vadim_Lizogub","t@stPsSwd"},{"webinar5","webinar5"}};
+    public static Object[][] issueDetailsProvider(){
+        return new Object[][]{
+                {"[Test Automation] QAAUTO6-T1_testing_issue (eagles)",
+                 "Testing issue created according to http://jira.hillel.it:8080/browse/QAAUT6-131 task"},
+        };
     }
 
     @BeforeTest
-    public void setup(){
-        System.setProperty("webdriver.chrome.driver","chromedriver_win_x86_2.41.exe");
+    @Parameters({"browser","username","password"})
+    public void setup(String browser, String cUsername, String cPassword){
 
-        driver = new ChromeDriver();
-
-//        LoginSteps loginSteps = new LoginSteps(driver);
-//        loginSteps.openLoginPage();
-//        loginSteps.signIn("Vadim_Lizogub","t@stPsSwd");
-    }
-
-    @Test (dataProvider = "credentials", priority = 1)
-    public void createNewIssueTest(String username, String password){
-
-        String textSummary = "[Test Automation] QAAUTO6-T1_testing_issue (eagles)";
-        String textDescription = "Testing issue created according to http://jira.hillel.it:8080/browse/QAAUT6-131 task";
+        switch(browser){
+            case "chrome":  System.setProperty("webdriver.chrome.driver","chromedriver_win_x86_2.41.exe");
+                driver = new ChromeDriver();
+                break;
+            default:
+                Assert.fail("Cannot find specified driver for browser " + browser);
+        }
 
         LoginSteps loginSteps = new LoginSteps(driver);
         loginSteps.openLoginPage();
-        loginSteps.signIn(username,password);
+        loginSteps.signIn(cUsername,cPassword);
+    }
+
+    @Test (dataProvider = "issueDetailsProvider", priority = 1)
+    public void createNewIssueTest(String textSummary, String textDescription){
 
         DashboardPage dashboardPage = new DashboardPage(driver);
         dashboardPage.navigate();
@@ -58,24 +57,7 @@ public class NewIssueTest {
         issueKey = dialog.getCreatedIssueKey();
         issueURL = dialog.getCreatedIssueLink();
 
-        System.out.println("Issue " + issueKey + " created \nURL: " + issueURL + "\n");
-
         Assert.assertTrue(dialog.isSuccessDialogDisplayed());
-    }
-
-    @Test (priority = 2, dependsOnMethods = {"createNewIssueTest"})
-    public void addCommentTest(){
-
-        String textComment = "Sample comment 1";
-
-        IssuePage issuePage = new IssuePage(driver);
-        issuePage.navigateTo(issueURL);
-        issuePage.clickAddCommentButton()
-                .selectTextMode()
-                .enterCommentText(textComment)
-                .submitForm();
-
-        Assert.assertEquals(issuePage.getLastComment(), textComment);
     }
 
     @Test (priority = 10, dependsOnMethods = {"createNewIssueTest"})
@@ -94,7 +76,9 @@ public class NewIssueTest {
     }
 
     @AfterTest
-    public void teardown(){
+    public void closeWebDriver(){
+
+        System.out.println("Issue " + issueKey + " created \nURL: " + issueURL + "\n");
         driver.quit();
     }
 }

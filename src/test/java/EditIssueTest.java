@@ -15,7 +15,7 @@ public class EditIssueTest {
 
     @BeforeTest
     @Parameters({"browser","username","password"})
-    public void setup(String browser, String cUsername, String cPassword){
+    public void setup(String browser, String username, String password){
 
         switch(browser){
             case "chrome":  System.setProperty("webdriver.chrome.driver","chromedriver_win_x86_2.41.exe");
@@ -27,7 +27,7 @@ public class EditIssueTest {
 
         LoginSteps loginSteps = new LoginSteps(driver);
         loginSteps.openLoginPage();
-        loginSteps.signIn(cUsername,cPassword);
+        loginSteps.signIn(username,password);
     }
 
     @Test
