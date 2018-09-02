@@ -2,7 +2,9 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.*;
 import steps.LoginSteps;
@@ -14,22 +16,32 @@ public class NewIssueTest {
     private String issueKey = "";
     private String issueURL = "";
 
+
+    @DataProvider
+    public static Object[][] credentials(){
+        return new Object[][]{{"Vadim_Lizogub","t@stPsSwd"},{"webinar5","webinar5"}};
+    }
+
     @BeforeTest
     public void setup(){
         System.setProperty("webdriver.chrome.driver","chromedriver_win_x86_2.41.exe");
 
         driver = new ChromeDriver();
 
-        LoginSteps loginSteps = new LoginSteps(driver);
-        loginSteps.openLoginPage();
-        loginSteps.signIn("Vadim_Lizogub","t@stPsSwd");
+//        LoginSteps loginSteps = new LoginSteps(driver);
+//        loginSteps.openLoginPage();
+//        loginSteps.signIn("Vadim_Lizogub","t@stPsSwd");
     }
 
-    @Test (priority = 1)
-    public void createNewIssueTest(){
+    @Test (dataProvider = "credentials", priority = 1)
+    public void createNewIssueTest(String username, String password){
 
         String textSummary = "[Test Automation] QAAUTO6-T1_testing_issue (eagles)";
         String textDescription = "Testing issue created according to http://jira.hillel.it:8080/browse/QAAUT6-131 task";
+
+        LoginSteps loginSteps = new LoginSteps(driver);
+        loginSteps.openLoginPage();
+        loginSteps.signIn(username,password);
 
         DashboardPage dashboardPage = new DashboardPage(driver);
         dashboardPage.navigate();
@@ -62,13 +74,6 @@ public class NewIssueTest {
                 .selectTextMode()
                 .enterCommentText(textComment)
                 .submitForm();
-
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @Test (priority = 10, dependsOnMethods = {"createNewIssueTest"})
@@ -84,5 +89,10 @@ public class NewIssueTest {
         NotificationDialog dialog = new NotificationDialog(driver);
 
         Assert.assertTrue(dialog.isSuccessDialogDisplayed());
+    }
+
+    @AfterTest
+    public void teardown(){
+        driver.quit();
     }
 }
