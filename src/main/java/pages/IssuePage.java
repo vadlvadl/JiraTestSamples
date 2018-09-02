@@ -39,12 +39,16 @@ public class IssuePage {
     }
 
     public IssuePage clickDeleteIssueButton(){
-        driver.findElement(By.id("delete-issue")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("delete-issue"))).click();
         return this;
     }
 
     public void confirmDeleteIssue(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("delete-issue-submit"))).click();
+    }
+
+    public WebElement getMenuDeleteButton(){
+        return driver.findElement(By.id("delete-issue"));
     }
 
     public String getLastComment(){
