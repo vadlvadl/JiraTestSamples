@@ -25,7 +25,7 @@ public class NewIssueTest {
     @Parameters({"browser","username","password"})
     public void setup(String browser, String cUsername, String cPassword){
 
-        if(System.getProperty("webdriver.chrome.driver") == null){System.setProperty("webdriver.chrome.driver","chromedriver_win_x86_2.41.exe");}
+//        if(System.getProperty("webdriver.chrome.driver") == null){System.setProperty("webdriver.chrome.driver","chromedriver_win_x86_2.41.exe");}
 
         switch(browser){
             case "chrome":  driver = new ChromeDriver();
