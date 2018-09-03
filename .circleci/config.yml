@@ -10,7 +10,7 @@ jobs:
     - run: mvn clean test site
     - store_artifacts:
         path: build/reports/tests
-        destination: tr2
+        destination: tr1
 
 workflows:
   version: 2
