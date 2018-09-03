@@ -80,3 +80,4 @@ public class NewIssueTest {
         driver.quit();
     }
 }
+
