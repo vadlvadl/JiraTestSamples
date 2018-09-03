@@ -11,7 +11,7 @@ jobs:
     - store_artifacts:
         path: target/surefire-reports
         destination: tr1
-    - store artifacts:
+    - store_artifacts:
         path: build/reports/tests
         destination: tr2
 
