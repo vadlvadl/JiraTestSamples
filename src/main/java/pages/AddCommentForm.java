@@ -19,7 +19,8 @@ public class AddCommentForm {
     }
 
     public AddCommentForm selectTextMode(){
-        form.findElement(By.xpath("//li[@data-mode='source']")).click();
+        (new WebDriverWait(driver,10))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-mode='source']"))).click();
         return this;
     }
 

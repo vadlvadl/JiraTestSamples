@@ -31,16 +31,15 @@ public class EditIssueTest {
     @Test
     @Parameters({"editIssueURL", "editIssueCommentText"})
     public void addCommentTest(String issueURL, String commentText){
-        String textComment = "Sample comment 1";
 
         IssuePage issuePage = new IssuePage(driver);
         issuePage.navigateTo(issueURL);
         issuePage.clickAddCommentButton()
                 .selectTextMode()
-                .enterCommentText(textComment)
+                .enterCommentText(commentText)
                 .submitForm();
 
-        Assert.assertEquals(issuePage.getLastComment(), textComment);
+        Assert.assertEquals(issuePage.getLastComment(), commentText);
     }
 
     @AfterTest
