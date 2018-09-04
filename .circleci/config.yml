@@ -7,7 +7,7 @@ jobs:
     - checkout
     - run: java -version
     - run: sudo apt-get install maven
-    - run: mvn clean test site
+    - run: mvn clean test
     - store_artifacts:
         path: build/reports/tests
         destination: tr1
