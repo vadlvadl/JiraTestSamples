@@ -22,7 +22,7 @@ public class NewIssueDialog {
     }
 
     public  NewIssueDialog enterSummary(String summary){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("summary"))).sendKeys(summary);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("summary3"))).sendKeys(summary);
         return this;
     }
     public  NewIssueDialog enterDescription(String description){

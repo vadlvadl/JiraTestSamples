@@ -1,3 +1,5 @@
+package listeners;
+
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -6,7 +8,7 @@ import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
 // The TestNG listener class
-public class ListenerClass extends TestListenerAdapter {
+public class ListenerAdapterClass extends TestListenerAdapter {
 
     @Attachment
     public byte[] captureScreenshot(WebDriver d) {
@@ -21,4 +23,5 @@ public class ListenerClass extends TestListenerAdapter {
             captureScreenshot((WebDriver) webDriverAttribute);
         }
     }
+
 }
