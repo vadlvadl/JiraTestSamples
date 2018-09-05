@@ -2,7 +2,10 @@
 
 <suite name="JiraTestSuite" parallel="tests">
 
-
+    <listeners>
+        <listener class-name="listeners.TestNGListenerClass" />
+        <listener class-name="listeners.ListenerAdapterClass" />
+    </listeners>
 
     <test name="CreateIssue">
         <parameter name="browser" value="chrome" />
