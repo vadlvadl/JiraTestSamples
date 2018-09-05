@@ -5,6 +5,7 @@
     <listeners>
         <listener class-name="listeners.SuiteListenerClass" />
         <listener class-name="listeners.ListenerAdapterClass" />
+        <listener class-name="listeners.TestListenerClass" />
     </listeners>
 
     <test name="CreateIssue">
