@@ -3,7 +3,7 @@ package listeners;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 
-public class TestNGListenerClass implements ISuiteListener {
+public class SuiteListenerClass implements ISuiteListener {
     @Override
     public void onStart(ISuite iSuite) {
         System.out.println("Starting test Suite");

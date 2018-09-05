@@ -3,7 +3,7 @@
 <suite name="JiraTestSuite" parallel="tests">
 
     <listeners>
-        <listener class-name="listeners.TestNGListenerClass" />
+        <listener class-name="listeners.SuiteListenerClass" />
         <listener class-name="listeners.ListenerAdapterClass" />
     </listeners>
 
