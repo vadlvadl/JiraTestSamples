@@ -7,10 +7,12 @@ import org.testng.TestListenerAdapter;
 
 // The TestNG listener class
 public class ListenerClass extends TestListenerAdapter {
+
     @Attachment
     public byte[] captureScreenshot(WebDriver d) {
         return ((TakesScreenshot) d).getScreenshotAs(OutputType.BYTES);
     }
+
     @Override
     public void onTestFailure(ITestResult tr) {
         Object webDriverAttribute = tr.getTestContext().getAttribute("WebDriver");
